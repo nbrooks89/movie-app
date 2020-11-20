@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
-function MovieDetails(props) {
-    return (
-        <div>
-            <h1>Movie Details</h1>
-        </div>
-    );
+function MovieDetails({ title }) {
+  return (
+    <div>
+      <h1>{title}</h1>
+    </div>
+  );
 }
 
 export default MovieDetails;

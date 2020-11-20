@@ -1,0 +1,18 @@
+.cardDetailsContainer {
+  border: 1px solid black;
+}
+
+.cardDetailsContainer img {
+  width: 100%;
+}
+
+.movieTitle {
+  font-size: 30px;
+
+  margin: 15px;
+  color: black;
+}
+
+.cardDetailsContainer a {
+  text-decoration: none;
+}
