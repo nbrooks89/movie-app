@@ -2,11 +2,11 @@ import React from 'react';
 import './HomePage.css';
 import SearchBar from '../../Components/SearchBar/SearchBar'
 
-function HomePage({someState}) {
+function HomePage({setMovies}) {
     return (
         <div>
-            {someState}
-            <SearchBar />
+          
+            <SearchBar setMovies={setMovies} />
         </div>
     );
 }
