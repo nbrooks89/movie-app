@@ -7,9 +7,8 @@ import { faThumbsDown } from "@fortawesome/free-solid-svg-icons";
 function MovieDetails({ match }) {
   const [movieDetails, setMovieDetails] = useState([]);
   const [cast, setCast] = useState([]);
-  const [favorites, setFavorites] = useState([
-    { title: movieDetails.title, thumpsup: 0, thumbsDown: 0 },
-  ]);
+  const [favorites, setFavorites] = useState([]);
+
   console.log(favorites);
   const handleGetDetails = () => {
     const key = process.env.REACT_APP_MOVIE_API_KEY;
@@ -19,13 +18,46 @@ function MovieDetails({ match }) {
       .then((res) => {
         setMovieDetails(res);
         setCast(res.credits.cast);
+        console.log(res.id);
       });
   };
 
-  const addFav = (props) => {};
+  const addFav = () => {
+    console.log("click");
+    let newArray = favorites;
+    let isNewItem = true;
+    console.log(newArray);
+    console.log(favorites);
+    favorites.forEach((item, i) => {
+      if (item.id + "" === movieDetails.id + "") {
+        newArray[i].thumbsUp++;
+        isNewItem = false;
+
+        return newArray;
+      }
+    });
+    if (isNewItem === true) {
+      newArray.push({
+        id: movieDetails.id,
+        title: movieDetails.title,
+        thumbsUp: 1,
+        thumbsDown: 0,
+      });
+      return newArray;
+    }
+    setFavorites(newArray);
+
+    localStorage.setItem("films", JSON.stringify(newArray));
+  };
+
   useEffect(() => {
+    let getFavs = localStorage.getItem("films");
+    getFavs = JSON.parse(getFavs);
+
+    console.log(getFavs);
     handleGetDetails();
-    console.log(movieDetails);
+    setFavorites(getFavs);
+    console.log(favorites);
     console.log(cast);
   }, []);
 
@@ -44,13 +76,12 @@ function MovieDetails({ match }) {
         <div>{movieDetails.release_date}</div>
         <div>{movieDetails.overview}</div>
 
-        {favorites.includes(i) &&
-          <FontAwesomeIcon
-            onClick={() => addFav({ items, i })}
-            icon={faThumbsUp}
-            size="3x"
-            color="rgb(169, 169, 177)"
-}
+        <FontAwesomeIcon
+          onClick={addFav}
+          icon={faThumbsUp}
+          size="3x"
+          color="rgb(169, 169, 177)"
+        />
       </div>
     </div>
   );
