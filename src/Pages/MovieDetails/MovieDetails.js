@@ -39,7 +39,31 @@ function MovieDetails({ match }) {
         id: movieDetails.id,
         title: movieDetails.title,
         thumbsUp: 1,
-        thumbsDown: 0,
+        thumbsDown: null,
+      });
+      return newArray;
+    }
+    setFavorites(newArray);
+    localStorage.setItem("films", JSON.stringify(newArray));
+  };
+  const addDislike = () => {
+    let newArray = [...favorites];
+    let isNewItem = true;
+
+    favorites.forEach((item, i) => {
+      if (item.id + "" === movieDetails.id + "") {
+        newArray[i].thumbsDown++;
+        isNewItem = false;
+      }
+      setFavorites(newArray);
+      return newArray;
+    });
+    if (isNewItem === true) {
+      newArray.push({
+        id: movieDetails.id,
+        title: movieDetails.title,
+        thumbsUp: null,
+        thumbsDown: 1,
       });
       return newArray;
     }
@@ -75,10 +99,17 @@ function MovieDetails({ match }) {
         <div>{movieDetails.release_date}</div>
         <div>{movieDetails.overview}</div>
         <div>{favItem?.thumbsUp}</div>
+        <div>{favItem?.thumbsDown}</div>
 
         <FontAwesomeIcon
           onClick={addFav}
           icon={faThumbsUp}
+          size="3x"
+          color="rgb(169, 169, 177)"
+        />
+        <FontAwesomeIcon
+          onClick={addDislike}
+          icon={faThumbsDown}
           size="3x"
           color="rgb(169, 169, 177)"
         />
