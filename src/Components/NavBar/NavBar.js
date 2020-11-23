@@ -1,11 +1,19 @@
-import React from 'react';
-
-function NavBar(props) {
-    return (
-        <div>
-            
-        </div>
-    );
+import React, { Children } from "react";
+import "./NavBar.css";
+import IosFilm from "react-ionicons/lib/IosFilm";
+import SearchBar from "../SearchBar/SearchBar";
+import { Link } from "react-router-dom";
+function NavBar({ setMovies, children }) {
+  return (
+    <div className="navContainer">
+      <div className="icon">
+        <Link to="/">
+          <IosFilm fontSize="55px" color="white" />
+        </Link>
+      </div>
+      <div>{children}</div>
+    </div>
+  );
 }
 
 export default NavBar;

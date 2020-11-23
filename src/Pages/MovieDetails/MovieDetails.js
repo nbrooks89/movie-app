@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import NoPicture from "../../assets/No_Picture.jpg";
 import "./MovieDetails.css";
+import moment from "moment";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsDown } from "@fortawesome/free-solid-svg-icons";
+
 function MovieDetails({ match }) {
   const [movieDetails, setMovieDetails] = useState([]);
-  //   const [cast, setCast] = useState([]);
+  const [cast, setCast] = useState([]);
   const [favorites, setFavorites] = useState([]);
 
   console.log(favorites);
@@ -17,8 +20,8 @@ function MovieDetails({ match }) {
       .then((res) => res.json())
       .then((res) => {
         setMovieDetails(res);
-        // setCast(res.credits.cast);
-        console.log(res.id);
+        setCast(res.credits.cast);
+        console.log(res.credits.cast);
       });
   };
 
@@ -86,33 +89,46 @@ function MovieDetails({ match }) {
 
   return (
     <div className="movieDetailsContainer">
+      <h1>{movieDetails.title}</h1>
       <div className="detailsInnerContainer">
-        <img
-          src={
-            movieDetails.poster_path
-              ? "https://image.tmdb.org/t/p/w400" + movieDetails.poster_path
-              : NoPicture
-          }
-          alt={movieDetails.title}
-        />
-        <h1>{movieDetails.title}</h1>
-        <div>{movieDetails.release_date}</div>
-        <div>{movieDetails.overview}</div>
-        <div>{favItem?.thumbsUp}</div>
-        <div>{favItem?.thumbsDown}</div>
+        <div className="detailsLeft">
+          <img
+            src={
+              movieDetails.poster_path
+                ? "https://image.tmdb.org/t/p/w400" + movieDetails.poster_path
+                : NoPicture
+            }
+            alt={movieDetails.title}
+          />
+        </div>
 
-        <FontAwesomeIcon
-          onClick={addFav}
-          icon={faThumbsUp}
-          size="3x"
-          color="rgb(169, 169, 177)"
-        />
-        <FontAwesomeIcon
-          onClick={addDislike}
-          icon={faThumbsDown}
-          size="3x"
-          color="rgb(169, 169, 177)"
-        />
+        <div className="detailsRight">
+          <div className="releaseDate">
+            Release Date: &nbsp;
+            {moment(movieDetails.release_date).format("MMMM Do YYYY")}
+          </div>
+          <div>{movieDetails.overview}</div>
+          <div className="thumbs">
+            <div className="thumbsUp">
+              <FontAwesomeIcon
+                onClick={addFav}
+                icon={faThumbsUp}
+                size="3x"
+                color="rgb(169, 169, 177)"
+              />
+              <div className="thumbsUpNumber">{favItem?.thumbsUp}</div>
+            </div>
+            <div className="thumbsDown">
+              <FontAwesomeIcon
+                onClick={addDislike}
+                icon={faThumbsDown}
+                size="3x"
+                color="rgb(169, 169, 177)"
+              />
+              <div className="thumbsDownNumber">{favItem?.thumbsDown}</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

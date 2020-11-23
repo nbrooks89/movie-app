@@ -1,11 +1,12 @@
 .movieListGrid {
-  padding: 10px;
-  overflow: hidden;
+  padding-top: 100px;
+
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   align-items: end;
-  grid-gap: 6rem;
+
+  grid-gap: 5rem;
 }
 .movieListContainer {
-  margin: 20px;
+  margin: 0px 100px;
 }

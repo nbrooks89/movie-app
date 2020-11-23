@@ -1,6 +1,58 @@
+.movieDetailsContainer {
+  background-color: rgb(217, 228, 238);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.movieDetailsContainer h1 {
+  padding-top: 80px;
+  margin-bottom: 60px;
+  font-size: 40px;
+}
 .detailsInnerContainer {
+  display: flex;
+  justify-content: center;
+
+  width: 800px;
+}
+
+.detailsLeft img {
+  height: 400px;
+}
+
+.detailsRight {
+  padding-top: 0px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 20px;
+}
+.releaseDate {
+  padding-bottom: 20px;
+}
+
+.thumbs {
+  display: flex;
   margin-top: 20px;
 }
-.detailsInnerContainer img {
-  height: 400px;
+.thumbsUp {
+  display: flex;
+  width: 70px;
+}
+.thumbsDown {
+  display: flex;
+  margin-left: 20px;
+  width: 100px;
+}
+.thumbsDownNumber {
+  font-size: 20px;
+  margin-left: 15px;
+  padding-top: 15px;
+}
+.thumbsUpNumber {
+  font-size: 20px;
+  margin-left: 15px;
+  padding-top: 15px;
 }
