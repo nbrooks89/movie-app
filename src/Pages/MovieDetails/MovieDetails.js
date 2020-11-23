@@ -6,7 +6,7 @@ import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsDown } from "@fortawesome/free-solid-svg-icons";
 function MovieDetails({ match }) {
   const [movieDetails, setMovieDetails] = useState([]);
-  const [cast, setCast] = useState([]);
+  //   const [cast, setCast] = useState([]);
   const [favorites, setFavorites] = useState([]);
 
   console.log(favorites);
@@ -17,24 +17,22 @@ function MovieDetails({ match }) {
       .then((res) => res.json())
       .then((res) => {
         setMovieDetails(res);
-        setCast(res.credits.cast);
+        // setCast(res.credits.cast);
         console.log(res.id);
       });
   };
 
   const addFav = () => {
-    console.log("click");
-    let newArray = favorites;
+    let newArray = [...favorites];
     let isNewItem = true;
-    console.log(newArray);
-    console.log(favorites);
+
     favorites.forEach((item, i) => {
       if (item.id + "" === movieDetails.id + "") {
         newArray[i].thumbsUp++;
         isNewItem = false;
-
-        return newArray;
       }
+      setFavorites(newArray);
+      return newArray;
     });
     if (isNewItem === true) {
       newArray.push({
@@ -46,20 +44,21 @@ function MovieDetails({ match }) {
       return newArray;
     }
     setFavorites(newArray);
-
     localStorage.setItem("films", JSON.stringify(newArray));
   };
 
   useEffect(() => {
-    let getFavs = localStorage.getItem("films");
-    getFavs = JSON.parse(getFavs);
-
-    console.log(getFavs);
+    const favoritesList = JSON.parse(localStorage.getItem("films"));
+    if (favoritesList) {
+      setFavorites(favoritesList);
+      console.log(favoritesList);
+      console.log(favorites);
+    }
     handleGetDetails();
-    setFavorites(getFavs);
-    console.log(favorites);
-    console.log(cast);
   }, []);
+
+  const favItem = favorites.find((fav) => fav.id === movieDetails.id);
+  console.log(favItem);
 
   return (
     <div className="movieDetailsContainer">
@@ -75,6 +74,7 @@ function MovieDetails({ match }) {
         <h1>{movieDetails.title}</h1>
         <div>{movieDetails.release_date}</div>
         <div>{movieDetails.overview}</div>
+        <div>{favItem?.thumbsUp}</div>
 
         <FontAwesomeIcon
           onClick={addFav}

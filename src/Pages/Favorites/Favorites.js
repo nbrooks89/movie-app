@@ -1,9 +1,7 @@
 import React from "react";
-import "./MovieCard.css";
-// import NoPicture from "../../assets/No_Picture.jpg";
 
-function MovieList() {
-  return <div className="favoritesDetailsContainer"></div>;
+function Favorites(props) {
+  return <div></div>;
 }
 
-export default MovieList;
+export default Favorites;

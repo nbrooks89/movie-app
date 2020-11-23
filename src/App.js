@@ -7,14 +7,15 @@ import MovieList from "./Pages/MovieList/MovieList";
 import MovieDetails from "./Pages/MovieDetails/MovieDetails";
 function App() {
   const [movieList, setMovieList] = useState([]);
+  // const [favorites, setFavorites] = useState([]);
 
   const setMovies = (results) => {
     setMovieList(results);
-    // this.props.history.push('/searchresults');
   };
-  // const getUserInput = (input) => {
-  // 	setUserInput( input );
-  // 	// this.props.history.push('/searchresults');
+
+  // const setFavoriteList = (favorite) => {
+  //   setFavorites(favorite);
+
   // };
 
   return (
