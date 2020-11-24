@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
 import "./SearchBar.css";
 
-function SearchBar({ setMovies }) {
+function SearchBar({ setMovies, history }) {
   const [userInput, setUserInput] = useState("");
   const [clickSubmit, setClickSubmit] = useState(false);
 
@@ -12,10 +12,11 @@ function SearchBar({ setMovies }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    handleGetRequest(userInput);
     setClickSubmit(true);
-    // event.target.reset();
+    handleGetRequest(userInput);
     setUserInput("");
+    history.push("/MovieList");
+
     // getUserInput(userInput);
   };
   const handleGetRequest = (searchInput) => {
@@ -42,14 +43,16 @@ function SearchBar({ setMovies }) {
 
   //   useEffect(() => {});
   if (clickSubmit === true) {
+    console.log(clickSubmit);
+    <Redirect to="/MovieList" />;
     return (
       <div className="formContainer">
-        <Redirect to="/MovieList" />
         <form onSubmit={handleSubmit}>
           <input
             className="searchContainer"
             value={userInput}
             onChange={handleChange}
+            required
           />
           <button className="searchButton" type="submit">
             <div>SEARCH</div>
@@ -65,6 +68,7 @@ function SearchBar({ setMovies }) {
           className="searchContainer"
           value={userInput}
           onChange={handleChange}
+          required
         />
         <button className="searchButton" type="submit">
           <div>SEARCH</div>
@@ -74,4 +78,4 @@ function SearchBar({ setMovies }) {
   );
 }
 
-export default SearchBar;
+export default withRouter(SearchBar);

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Route, withRouter } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Route } from "react-router-dom";
 import "./App.css";
 import NavBar from "./Components/NavBar/NavBar";
 
@@ -19,7 +19,7 @@ function App() {
   //   setFavorites(favorite);
 
   // };
-  console.log(window.location);
+
   return (
     <div className="App">
       <NavBar setMovies={setMovies}>
@@ -43,4 +43,4 @@ function App() {
   );
 }
 
-export default withRouter(App);
+export default App;

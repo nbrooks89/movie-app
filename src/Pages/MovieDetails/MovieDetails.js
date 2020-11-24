@@ -82,53 +82,76 @@ function MovieDetails({ match }) {
       console.log(favorites);
     }
     handleGetDetails();
+    window.scrollTo(0, 0);
   }, []);
 
   const favItem = favorites.find((fav) => fav.id === movieDetails.id);
   console.log(favItem);
 
   return (
-    <div className="movieDetailsContainer">
-      <h1>{movieDetails.title}</h1>
-      <div className="detailsInnerContainer">
-        <div className="detailsLeft">
-          <img
-            src={
-              movieDetails.poster_path
-                ? "https://image.tmdb.org/t/p/w400" + movieDetails.poster_path
-                : NoPicture
-            }
-            alt={movieDetails.title}
-          />
-        </div>
+    <div className="detailsPage">
+      <div className="movieDetailsContainer">
+        <h1>{movieDetails.title}</h1>
+        <div className="detailsInnerContainer">
+          <div className="detailsLeft">
+            <img
+              src={
+                movieDetails.poster_path
+                  ? "https://image.tmdb.org/t/p/w400" + movieDetails.poster_path
+                  : NoPicture
+              }
+              alt={movieDetails.title}
+            />
+          </div>
 
-        <div className="detailsRight">
-          <div className="releaseDate">
-            Release Date: &nbsp;
-            {moment(movieDetails.release_date).format("MMMM Do YYYY")}
-          </div>
-          <div>{movieDetails.overview}</div>
-          <div className="thumbs">
-            <div className="thumbsUp">
-              <FontAwesomeIcon
-                onClick={addFav}
-                icon={faThumbsUp}
-                size="3x"
-                color="rgb(169, 169, 177)"
-              />
-              <div className="thumbsUpNumber">{favItem?.thumbsUp}</div>
+          <div className="detailsRight">
+            <div className="releaseDate">
+              Release Date: &nbsp;
+              {moment(movieDetails.release_date).format("MMMM Do YYYY")}
             </div>
-            <div className="thumbsDown">
-              <FontAwesomeIcon
-                onClick={addDislike}
-                icon={faThumbsDown}
-                size="3x"
-                color="rgb(169, 169, 177)"
-              />
-              <div className="thumbsDownNumber">{favItem?.thumbsDown}</div>
+            <div>{movieDetails.overview}</div>
+            <div className="thumbs">
+              <div className="thumbsUp">
+                <FontAwesomeIcon
+                  onClick={addFav}
+                  icon={faThumbsUp}
+                  size="3x"
+                  color="rgb(169, 169, 177)"
+                />
+                <div className="thumbsUpNumber">{favItem?.thumbsUp}</div>
+              </div>
+              <div className="thumbsDown">
+                <FontAwesomeIcon
+                  onClick={addDislike}
+                  icon={faThumbsDown}
+                  size="3x"
+                  color="rgb(169, 169, 177)"
+                />
+                <div className="thumbsDownNumber">{favItem?.thumbsDown}</div>
+              </div>
             </div>
           </div>
         </div>
+      </div>
+      <div className="cast">CAST:</div>
+      <div className="movieActorGrid">
+        {cast.map((actor) => {
+          return (
+            <>
+              <div className="actorCardContainer">
+                <div>{actor.name}</div>
+                <img
+                  src={
+                    actor.profile_path
+                      ? "https://image.tmdb.org/t/p/w400" + actor.profile_path
+                      : NoPicture
+                  }
+                  alt={actor.name}
+                />
+              </div>
+            </>
+          );
+        })}
       </div>
     </div>
   );

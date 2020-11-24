@@ -1,5 +1,7 @@
+.detailsPage {
+  /* background-color: rgb(217, 228, 238); */
+}
 .movieDetailsContainer {
-  background-color: rgb(217, 228, 238);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -13,8 +15,7 @@
 .detailsInnerContainer {
   display: flex;
   justify-content: center;
-
-  width: 800px;
+  margin: 0 50px;
 }
 
 .detailsLeft img {
@@ -55,4 +56,20 @@
   font-size: 20px;
   margin-left: 15px;
   padding-top: 15px;
+}
+.movieActorGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  align-items: end;
+  grid-gap: 2rem;
+  margin: 40px 60px;
+}
+.actorCardContainer {
+  border: 1px solid black;
+}
+
+.actorCardContainer img {
+  width: 100%;
+  justify-self: center;
+  align-self: center;
 }

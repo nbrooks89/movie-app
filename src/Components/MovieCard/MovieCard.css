@@ -18,3 +18,8 @@
 .cardDetailsContainer a {
   text-decoration: none;
 }
+
+.cast {
+  margin-top: 70px;
+  font-size: 40px;
+}
