@@ -1,0 +1,16 @@
+.navContainer {
+  height: 60px;
+  width: 100%;
+  background-color: rgb(29, 122, 165);
+  position: fixed;
+  box-shadow: 1px 1px 2px rgb(78, 76, 76);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.navContainer a {
+  margin-left: 10px;
+}
+.search {
+  margin-right: 10px;
+}

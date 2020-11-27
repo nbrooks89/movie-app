@@ -1,0 +1,17 @@
+.searchContainer {
+  height: 38px;
+  width: 200px;
+  border: 2px solid black;
+  margin-right: 2px;
+  font-size: 20px;
+  border: 2px solid rgb(29, 122, 165);
+}
+
+.searchButton {
+  height: 43px;
+  width: 100px;
+  border-radius: 0px;
+  font-size: 19px;
+  margin-right: 5px;
+  border: 2px solid rgb(29, 122, 165);
+}

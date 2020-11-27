@@ -1,0 +1,72 @@
+.movieDetailsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.movieDetailsContainer h1 {
+  padding-top: 80px;
+  margin-bottom: 60px;
+  font-size: 40px;
+}
+.detailsInnerContainer {
+  display: flex;
+  justify-content: center;
+  margin: 0 50px;
+}
+
+.detailsLeft img {
+  height: 400px;
+}
+
+.detailsRight {
+  padding-top: 0px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 20px;
+}
+.releaseDate {
+  margin-bottom: 0px;
+}
+
+.thumbs {
+  display: flex;
+  margin-top: 20px;
+}
+.thumbsUp {
+  display: flex;
+  width: 70px;
+}
+.thumbsDown {
+  display: flex;
+  margin-left: 20px;
+  width: 100px;
+}
+.thumbsDownNumber {
+  font-size: 20px;
+  margin-left: 15px;
+  padding-top: 15px;
+}
+.thumbsUpNumber {
+  font-size: 20px;
+  margin-left: 15px;
+  padding-top: 15px;
+}
+.movieActorGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  align-items: end;
+  grid-gap: 2rem;
+  margin: 40px 60px;
+}
+.actorCardContainer {
+  border: 1px solid black;
+}
+
+.actorCardContainer img {
+  width: 100%;
+  justify-self: center;
+  align-self: center;
+}

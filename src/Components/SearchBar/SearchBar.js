@@ -1,12 +1,73 @@
-import React from 'react';
-import './SearchBar.css';
+import React, { useState } from "react";
+import { Redirect, withRouter } from "react-router-dom";
+import "./SearchBar.css";
 
-function SearchBar() {
+function SearchBar({ setMovies, history }) {
+  const [userInput, setUserInput] = useState("");
+  const [clickSubmit, setClickSubmit] = useState(false);
+
+  const handleChange = (event) => {
+    setUserInput(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setClickSubmit(true);
+    handleGetRequest(userInput);
+    setUserInput("");
+    history.push("/MovieList");
+  };
+  const handleGetRequest = (searchInput) => {
+    const key = process.env.REACT_APP_MOVIE_API_KEY;
+
+    const success = (res) => (res.ok ? res.json() : Promise.resolve({}));
+
+    const page1 = fetch(
+      `https://api.themoviedb.org/3/search/movie?api_key=${key}&query=${searchInput}&page=1`
+    ).then(success);
+    const page2 = fetch(
+      `https://api.themoviedb.org/3/search/movie?api_key=${key}&query=${searchInput}&page=2`
+    ).then(success);
+    const page3 = fetch(
+      `https://api.themoviedb.org/3/search/movie?api_key=${key}&query=${searchInput}&page=3`
+    ).then(success);
+
+    return Promise.all([page1, page2, page3]).then(([page1, page2, page3]) => {
+      let results = page1.results.concat(page2.results);
+      results = results.concat(page3.results);
+      setMovies(results);
+    });
+  };
+
+  if (clickSubmit === true) {
+    <Redirect to="/MovieList" />;
     return (
-        <div>
-            <input />
-        </div>
+      <form className="formContainer" onSubmit={handleSubmit}>
+        <input
+          className="searchContainer"
+          value={userInput}
+          onChange={handleChange}
+          required
+        />
+        <button className="searchButton" type="submit">
+          <div>SEARCH</div>
+        </button>
+      </form>
     );
+  }
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        className="searchContainer"
+        value={userInput}
+        onChange={handleChange}
+        required
+      />
+      <button className="searchButton" type="submit">
+        SEARCH
+      </button>
+    </form>
+  );
 }
 
-export default SearchBar;
+export default withRouter(SearchBar);

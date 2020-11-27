@@ -1,0 +1,25 @@
+.cardDetailsContainer {
+  border: 1px solid black;
+}
+
+.cardDetailsContainer img {
+  width: 100%;
+  justify-self: center;
+  align-self: center;
+}
+
+.movieTitle {
+  font-size: 25px;
+  font-weight: 400;
+  margin: 15px;
+  color: black;
+}
+
+.cardDetailsContainer a {
+  text-decoration: none;
+}
+
+.cast {
+  margin-top: 70px;
+  font-size: 40px;
+}
