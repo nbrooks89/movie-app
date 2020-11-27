@@ -1,6 +1,3 @@
-.detailsPage {
-  /* background-color: rgb(217, 228, 238); */
-}
 .movieDetailsContainer {
   display: flex;
   flex-direction: column;
@@ -31,7 +28,7 @@
   margin-left: 20px;
 }
 .releaseDate {
-  padding-bottom: 20px;
+  margin-bottom: 0px;
 }
 
 .thumbs {

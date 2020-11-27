@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Redirect, withRouter } from "react-router-dom";
 import "./SearchBar.css";
 
@@ -16,8 +16,6 @@ function SearchBar({ setMovies, history }) {
     handleGetRequest(userInput);
     setUserInput("");
     history.push("/MovieList");
-
-    // getUserInput(userInput);
   };
   const handleGetRequest = (searchInput) => {
     const key = process.env.REACT_APP_MOVIE_API_KEY;
@@ -41,29 +39,10 @@ function SearchBar({ setMovies, history }) {
     });
   };
 
-  //   useEffect(() => {});
   if (clickSubmit === true) {
-    console.log(clickSubmit);
     <Redirect to="/MovieList" />;
     return (
-      <div className="formContainer">
-        <form onSubmit={handleSubmit}>
-          <input
-            className="searchContainer"
-            value={userInput}
-            onChange={handleChange}
-            required
-          />
-          <button className="searchButton" type="submit">
-            <div>SEARCH</div>
-          </button>
-        </form>
-      </div>
-    );
-  }
-  return (
-    <div>
-      <form onSubmit={handleSubmit}>
+      <form className="formContainer" onSubmit={handleSubmit}>
         <input
           className="searchContainer"
           value={userInput}
@@ -74,7 +53,20 @@ function SearchBar({ setMovies, history }) {
           <div>SEARCH</div>
         </button>
       </form>
-    </div>
+    );
+  }
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        className="searchContainer"
+        value={userInput}
+        onChange={handleChange}
+        required
+      />
+      <button className="searchButton" type="submit">
+        SEARCH
+      </button>
+    </form>
   );
 }
 

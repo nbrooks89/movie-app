@@ -5,14 +5,12 @@ import SearchBar from "../SearchBar/SearchBar";
 import { Link } from "react-router-dom";
 function NavBar({ setMovies, children }) {
   return (
-    <div className="navContainer">
-      <div className="icon">
-        <Link to="/">
-          <IosFilm fontSize="55px" color="white" />
-        </Link>
-      </div>
+    <nav className="navContainer">
+      <Link to="/">
+        <IosFilm fontSize="55px" color="white" />
+      </Link>
       <div>{children}</div>
-    </div>
+    </nav>
   );
 }
 

@@ -11,6 +11,7 @@ function MovieDetails({ match }) {
   const [movieDetails, setMovieDetails] = useState([]);
   const [cast, setCast] = useState([]);
   const [favorites, setFavorites] = useState([]);
+  const [director, setDirector] = useState("");
 
   console.log(favorites);
   const handleGetDetails = () => {
@@ -21,7 +22,14 @@ function MovieDetails({ match }) {
       .then((res) => {
         setMovieDetails(res);
         setCast(res.credits.cast);
-        console.log(res.credits.cast);
+        console.log(res);
+
+        res.credits.crew.forEach(function (entry) {
+          if (entry.job === "Director") {
+            setDirector(entry.name);
+          }
+        });
+        console.log("Director", director);
       });
   };
 
@@ -90,7 +98,7 @@ function MovieDetails({ match }) {
 
   return (
     <div className="detailsPage">
-      <div className="movieDetailsContainer">
+      <section className="movieDetailsContainer">
         <h1>{movieDetails.title}</h1>
         <div className="detailsInnerContainer">
           <div className="detailsLeft">
@@ -105,11 +113,12 @@ function MovieDetails({ match }) {
           </div>
 
           <div className="detailsRight">
-            <div className="releaseDate">
+            <p className="releaseDate">
               Release Date: &nbsp;
               {moment(movieDetails.release_date).format("MMMM Do YYYY")}
-            </div>
-            <div>{movieDetails.overview}</div>
+            </p>
+            <p>Director:&nbsp;{director}</p>
+            <p>{movieDetails.overview}</p>
             <div className="thumbs">
               <div className="thumbsUp">
                 <FontAwesomeIcon
@@ -118,7 +127,7 @@ function MovieDetails({ match }) {
                   size="3x"
                   color="rgb(169, 169, 177)"
                 />
-                <div className="thumbsUpNumber">{favItem?.thumbsUp}</div>
+                <p className="thumbsUpNumber">{favItem?.thumbsUp}</p>
               </div>
               <div className="thumbsDown">
                 <FontAwesomeIcon
@@ -127,19 +136,19 @@ function MovieDetails({ match }) {
                   size="3x"
                   color="rgb(169, 169, 177)"
                 />
-                <div className="thumbsDownNumber">{favItem?.thumbsDown}</div>
+                <p className="thumbsDownNumber">{favItem?.thumbsDown}</p>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div className="cast">CAST:</div>
-      <div className="movieActorGrid">
-        {cast.map((actor) => {
-          return (
-            <>
+      </section>
+      <section>
+        <h2 className="cast">CAST:</h2>
+        <div className="movieActorGrid">
+          {cast.map((actor) => {
+            return (
               <div className="actorCardContainer">
-                <div>{actor.name}</div>
+                <p>{actor.name}</p>
                 <img
                   src={
                     actor.profile_path
@@ -149,10 +158,10 @@ function MovieDetails({ match }) {
                   alt={actor.name}
                 />
               </div>
-            </>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      </section>
     </div>
   );
 }
