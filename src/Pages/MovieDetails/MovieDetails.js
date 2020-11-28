@@ -70,7 +70,7 @@ function MovieDetails({ match }) {
       thumbsDown: 1,
     };
     if (!localStorage.getItem("films")) {
-      localStorage.setItem("films", JSON.stringify([dislikeObj]);
+      localStorage.setItem("films", JSON.stringify([dislikeObj]));
       setFavorites([dislikeObj]);
     } else {
       let newArray = [...favorites];
