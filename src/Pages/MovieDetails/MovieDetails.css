@@ -10,15 +10,17 @@
 .movieDetailsContainer h1 {
   padding-top: 80px;
   margin-bottom: 60px;
-  font-size: 40px;
+  font-size: 45px;
+  font-family: "Castoro", serif;
 }
 .detailsInnerContainer {
   display: flex;
   justify-content: center;
-  margin: 0 50px;
+  width: 900px;
+  max-width: calc(100% - 60px);
 }
-
 .detailsLeft img {
+  border: 1px solid rgb(109, 105, 105);
   height: 400px;
 }
 
@@ -31,21 +33,28 @@
   margin-left: 20px;
 }
 .releaseDate {
-  padding-bottom: 20px;
+  margin-bottom: 0;
 }
 
 .thumbs {
   display: flex;
+  align-items: center;
   margin-top: 20px;
 }
 .thumbsUp {
   display: flex;
   width: 70px;
+  margin-left: 20px;
 }
 .thumbsDown {
   display: flex;
   margin-left: 20px;
-  width: 100px;
+}
+.thumbsUp:hover {
+  cursor: pointer;
+}
+.thumbsDown:hover {
+  cursor: pointer;
 }
 .thumbsDownNumber {
   font-size: 20px;
@@ -72,4 +81,10 @@
   width: 100%;
   justify-self: center;
   align-self: center;
+}
+@media screen and (max-width: 750px) {
+  .detailsInnerContainer {
+    display: flex;
+    flex-direction: column;
+  }
 }

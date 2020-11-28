@@ -11,7 +11,7 @@ function MovieDetails({ match }) {
   const [movieDetails, setMovieDetails] = useState([]);
   const [cast, setCast] = useState([]);
   const [favorites, setFavorites] = useState([]);
-  const [director, setDirector] = useState([]);
+  const [director, setDirector] = useState("");
 
   const handleGetDetails = () => {
     const key = process.env.REACT_APP_MOVIE_API_KEY;
@@ -25,6 +25,7 @@ function MovieDetails({ match }) {
           if (entry.job === "Director") {
             setDirector(entry.name);
           }
+          console.log("director", director);
         });
       });
   };
@@ -105,7 +106,7 @@ function MovieDetails({ match }) {
 
   return (
     <div className="detailsPage">
-      <div className="movieDetailsContainer">
+      <section className="movieDetailsContainer">
         <h1>{movieDetails.title}</h1>
         <div className="detailsInnerContainer">
           <div className="detailsLeft">
@@ -120,12 +121,18 @@ function MovieDetails({ match }) {
           </div>
 
           <div className="detailsRight">
-            <div className="releaseDate">
-              Release Date: &nbsp;
-              {moment(movieDetails.release_date).format("MMMM Do YYYY")}
-            </div>
-            <p>{director}</p>
-            <div>{movieDetails.overview}</div>
+            <p>{movieDetails.overview}</p>
+            {movieDetails.release_date !== "" && (
+              <p className="releaseDate">
+                <b>Release Date</b>: &nbsp;
+                {moment(movieDetails.release_date).format("MMMM Do YYYY")}
+              </p>
+            )}
+            {director !== "" && (
+              <p>
+                <b>Director</b>:&nbsp;{director}
+              </p>
+            )}
             <div className="thumbs">
               <div className="thumbsUp">
                 <FontAwesomeIcon
@@ -148,14 +155,14 @@ function MovieDetails({ match }) {
             </div>
           </div>
         </div>
-      </div>
+      </section>
       <div className="cast">CAST:</div>
-      <div className="movieActorGrid">
+      <section className="movieActorGrid">
         {cast.map((actor) => {
           return (
             <>
               <div className="actorCardContainer">
-                <div>{actor.name}</div>
+                <p>{actor.name}</p>
                 <img
                   src={
                     actor.profile_path
@@ -168,7 +175,7 @@ function MovieDetails({ match }) {
             </>
           );
         })}
-      </div>
+      </section>
     </div>
   );
 }
