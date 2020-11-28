@@ -24,7 +24,7 @@ function MovieDetails({ match }) {
         console.log(res.credits.cast);
       });
   };
-
+  const windowGlobal = typeof window !== "undefined" && window;
   const addFav = () => {
     let newArray = [...favorites];
     let isNewItem = true;
@@ -47,7 +47,7 @@ function MovieDetails({ match }) {
       return newArray;
     }
     setFavorites(newArray);
-    localStorage.setItem("films", JSON.stringify(newArray));
+    windowGlobal.localStorage.setItem("films", JSON.stringify(newArray));
   };
   const addDislike = () => {
     let newArray = [...favorites];
@@ -71,11 +71,13 @@ function MovieDetails({ match }) {
       return newArray;
     }
     setFavorites(newArray);
-    localStorage.setItem("films", JSON.stringify(newArray));
+    windowGlobal.localStorage.setItem("films", JSON.stringify(newArray));
   };
 
   useEffect(() => {
-    const favoritesList = JSON.parse(localStorage.getItem("films"));
+    const favoritesList = JSON.parse(
+      windowGlobal.localStorage.getItem("films")
+    );
     if (favoritesList) {
       setFavorites(favoritesList);
       console.log(favoritesList);
