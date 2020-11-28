@@ -11,9 +11,7 @@ function MovieDetails({ match }) {
   const [movieDetails, setMovieDetails] = useState([]);
   const [cast, setCast] = useState([]);
   const [favorites, setFavorites] = useState([]);
-  const [director, setDirector] = useState("");
 
-  console.log(favorites);
   const handleGetDetails = () => {
     const key = process.env.REACT_APP_MOVIE_API_KEY;
     const url = `https://api.themoviedb.org/3/movie/${match.params.id}?api_key=${key}&append_to_response=credits&page=1`;
@@ -22,16 +20,15 @@ function MovieDetails({ match }) {
       .then((res) => {
         setMovieDetails(res);
         setCast(res.credits.cast);
-        console.log(res);
-
         res.credits.crew.forEach(function (entry) {
           if (entry.job === "Director") {
             setDirector(entry.name);
           }
         });
+
       });
   };
-
+ 
   const addFav = () => {
     const favObj = {
       id: movieDetails.id,
@@ -61,6 +58,7 @@ function MovieDetails({ match }) {
       setFavorites(newArray);
       localStorage.setItem("films", JSON.stringify(newArray));
     }
+
   };
   const addDislike = () => {
     const dislikeObj = {
@@ -94,7 +92,9 @@ function MovieDetails({ match }) {
   };
 
   useEffect(() => {
-    const favoritesList = JSON.parse(localStorage.getItem("films"));
+    const favoritesList = JSON.parse(
+      windowGlobal.localStorage.getItem("films")
+    );
     if (favoritesList) {
       setFavorites(favoritesList);
       console.log(favoritesList);
@@ -105,11 +105,10 @@ function MovieDetails({ match }) {
   }, []);
 
   const favItem = favorites.find((fav) => fav.id === movieDetails.id);
-  console.log(favItem);
 
   return (
     <div className="detailsPage">
-      <section className="movieDetailsContainer">
+      <div className="movieDetailsContainer">
         <h1>{movieDetails.title}</h1>
         <div className="detailsInnerContainer">
           <div className="detailsLeft">
@@ -124,12 +123,11 @@ function MovieDetails({ match }) {
           </div>
 
           <div className="detailsRight">
-            <p className="releaseDate">
+            <div className="releaseDate">
               Release Date: &nbsp;
               {moment(movieDetails.release_date).format("MMMM Do YYYY")}
-            </p>
-            <p>Director:&nbsp;{director}</p>
-            <p>{movieDetails.overview}</p>
+            </div>
+            <div>{movieDetails.overview}</div>
             <div className="thumbs">
               <div className="thumbsUp">
                 <FontAwesomeIcon
@@ -138,7 +136,7 @@ function MovieDetails({ match }) {
                   size="3x"
                   color="rgb(169, 169, 177)"
                 />
-                <p className="thumbsUpNumber">{favItem?.thumbsUp}</p>
+                <div className="thumbsUpNumber">{favItem?.thumbsUp}</div>
               </div>
               <div className="thumbsDown">
                 <FontAwesomeIcon
@@ -147,19 +145,19 @@ function MovieDetails({ match }) {
                   size="3x"
                   color="rgb(169, 169, 177)"
                 />
-                <p className="thumbsDownNumber">{favItem?.thumbsDown}</p>
+                <div className="thumbsDownNumber">{favItem?.thumbsDown}</div>
               </div>
             </div>
           </div>
         </div>
-      </section>
-      <section>
-        <h2 className="cast">CAST:</h2>
-        <div className="movieActorGrid">
-          {cast.map((actor) => {
-            return (
+      </div>
+      <div className="cast">CAST:</div>
+      <div className="movieActorGrid">
+        {cast.map((actor) => {
+          return (
+            <>
               <div className="actorCardContainer">
-                <p>{actor.name}</p>
+                <div>{actor.name}</div>
                 <img
                   src={
                     actor.profile_path
@@ -169,10 +167,10 @@ function MovieDetails({ match }) {
                   alt={actor.name}
                 />
               </div>
-            );
-          })}
-        </div>
-      </section>
+            </>
+          );
+        })}
+      </div>
     </div>
   );
 }
