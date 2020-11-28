@@ -7,7 +7,7 @@ function MovieList({ title, id, poster, imgUrl }) {
   return (
     <div className="cardDetailsContainer">
       <Link to={"/Movie/" + id}>
-        <h2 className="movieTitle">{title}</h2>
+        <div className="movieTitle">{title}</div>
         <img src={poster ? imgUrl + poster : NoPicture} alt={title} key={id} />
       </Link>
     </div>
