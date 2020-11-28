@@ -1,70 +1,32 @@
-set# Getting Started with Create React App
+# Movie Dictionary
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An App created with React and CSS
 
-## Available Scripts
+### Description
 
-In the project directory, you can run:
+Movie Dictionary is a web app that allows a user to search for a movie title, click on that movie title for more information, and give that movie a thumbs up or thumbs down. I also allowed the ability to view the full cast in the movie details page.
 
-### `yarn start`
+![image](https://user-images.githubusercontent.com/63984156/100488669-93c50380-30dd-11eb-8303-652dc5839e8b.png)
+![image](https://user-images.githubusercontent.com/63984156/100488701-d1299100-30dd-11eb-8981-bc883f01cff4.png)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+![image](https://user-images.githubusercontent.com/63984156/100488743-151c9600-30de-11eb-993b-7d66cf11e6d3.png)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## User Stories
 
-### `yarn test`
+### MVP User Stories
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- As a user, I want to be able to search for a movie and see the title and an image of the movie.
+- As a user, I would like click on the movie title, and see a details page with the director,the movie release date, a movie overview, and the cast.
+- As a user, I want to be able to give a movie a thumbs up or thumbs down.
 
-### `yarn build`
+## API Attribution:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+[The Movie Database API](https://developers.themoviedb.org/3)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Getting Started:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Fork, clone and run npm install in your terminal. to start your app in a local server run yarn start
 
-### `yarn eject`
+## CHECK OUT THE DEPLOYED VERSION HERE:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+https://jolly-yonath-f24d7e.netlify.app/
