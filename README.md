@@ -1,4 +1,6 @@
-# Movie Creds
+
+# Movie Dictionary
+
 
 An App created with React and CSS
 
@@ -27,6 +29,5 @@ Movie Dictionary is a web app that allows a user to search for a movie title, cl
 
 Fork, clone and run npm install in your terminal. to start your app in a local server run yarn start
 
-## CHECK OUT THE DEPLOYED VERSION HERE:
 
-https://jolly-yonath-f24d7e.netlify.app/
+
