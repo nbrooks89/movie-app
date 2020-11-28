@@ -12,7 +12,6 @@ function MovieDetails({ match }) {
   const [cast, setCast] = useState([]);
   const [favorites, setFavorites] = useState([]);
 
-  console.log(favorites);
   const handleGetDetails = () => {
     const key = process.env.REACT_APP_MOVIE_API_KEY;
     const url = `https://api.themoviedb.org/3/movie/${match.params.id}?api_key=${key}&append_to_response=credits&page=1`;
@@ -21,57 +20,75 @@ function MovieDetails({ match }) {
       .then((res) => {
         setMovieDetails(res);
         setCast(res.credits.cast);
-        console.log(res.credits.cast);
+        res.credits.crew.forEach(function (entry) {
+          if (entry.job === "Director") {
+            setDirector(entry.name);
+          }
+        });
+
       });
   };
-  const windowGlobal = typeof window !== "undefined" && window;
+ 
   const addFav = () => {
-    let newArray = [...favorites];
-    let isNewItem = true;
+    const favObj = {
+      id: movieDetails.id,
+      title: movieDetails.title,
+      thumbsUp: 1,
+      thumbsDown: null,
+    };
+    if (!localStorage.getItem("films")) {
+      localStorage.setItem("films", JSON.stringify([favObj]));
+      setFavorites([favObj]);
+    } else {
+      let newArray = [...favorites];
+      let isNewItem = true;
 
-    favorites.forEach((item, i) => {
-      if (item.id + "" === movieDetails.id + "") {
-        newArray[i].thumbsUp++;
-        isNewItem = false;
+      favorites.forEach((item, i) => {
+        if (item.id + "" === movieDetails.id + "") {
+          newArray[i].thumbsUp++;
+          isNewItem = false;
+        }
+        setFavorites(newArray);
+        return newArray;
+      });
+      if (isNewItem === true) {
+        newArray.push(favObj);
+        return newArray;
       }
       setFavorites(newArray);
-      return newArray;
-    });
-    if (isNewItem === true) {
-      newArray.push({
-        id: movieDetails.id,
-        title: movieDetails.title,
-        thumbsUp: 1,
-        thumbsDown: null,
-      });
-      return newArray;
+      localStorage.setItem("films", JSON.stringify(newArray));
     }
-    setFavorites(newArray);
-    windowGlobal.localStorage.setItem("films", JSON.stringify(newArray));
+
   };
   const addDislike = () => {
-    let newArray = [...favorites];
-    let isNewItem = true;
+    const dislikeObj = {
+      id: movieDetails.id,
+      title: movieDetails.title,
+      thumbsUp: null,
+      thumbsDown: 1,
+    };
+    if (!localStorage.getItem("films")) {
+      localStorage.setItem("films", JSON.stringify([dislikeObj]));
+      setFavorites([dislikeObj]);
+    } else {
+      let newArray = [...favorites];
+      let isNewItem = true;
 
-    favorites.forEach((item, i) => {
-      if (item.id + "" === movieDetails.id + "") {
-        newArray[i].thumbsDown++;
-        isNewItem = false;
+      favorites.forEach((item, i) => {
+        if (item.id + "" === movieDetails.id + "") {
+          newArray[i].thumbsDown++;
+          isNewItem = false;
+        }
+        setFavorites(newArray);
+        return newArray;
+      });
+      if (isNewItem === true) {
+        newArray.push(dislikeObj);
+        return newArray;
       }
       setFavorites(newArray);
-      return newArray;
-    });
-    if (isNewItem === true) {
-      newArray.push({
-        id: movieDetails.id,
-        title: movieDetails.title,
-        thumbsUp: null,
-        thumbsDown: 1,
-      });
-      return newArray;
+      localStorage.setItem("films", JSON.stringify(newArray));
     }
-    setFavorites(newArray);
-    windowGlobal.localStorage.setItem("films", JSON.stringify(newArray));
   };
 
   useEffect(() => {
@@ -88,7 +105,6 @@ function MovieDetails({ match }) {
   }, []);
 
   const favItem = favorites.find((fav) => fav.id === movieDetails.id);
-  console.log(favItem);
 
   return (
     <div className="detailsPage">
