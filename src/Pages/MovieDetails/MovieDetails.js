@@ -11,6 +11,7 @@ function MovieDetails({ match }) {
   const [movieDetails, setMovieDetails] = useState([]);
   const [cast, setCast] = useState([]);
   const [favorites, setFavorites] = useState([]);
+  const [director, setDirector] = useState([]);
 
   const handleGetDetails = () => {
     const key = process.env.REACT_APP_MOVIE_API_KEY;
@@ -25,10 +26,9 @@ function MovieDetails({ match }) {
             setDirector(entry.name);
           }
         });
-
       });
   };
- 
+
   const addFav = () => {
     const favObj = {
       id: movieDetails.id,
@@ -58,7 +58,6 @@ function MovieDetails({ match }) {
       setFavorites(newArray);
       localStorage.setItem("films", JSON.stringify(newArray));
     }
-
   };
   const addDislike = () => {
     const dislikeObj = {
@@ -92,9 +91,7 @@ function MovieDetails({ match }) {
   };
 
   useEffect(() => {
-    const favoritesList = JSON.parse(
-      windowGlobal.localStorage.getItem("films")
-    );
+    const favoritesList = JSON.parse(localStorage.getItem("films"));
     if (favoritesList) {
       setFavorites(favoritesList);
       console.log(favoritesList);
@@ -127,6 +124,7 @@ function MovieDetails({ match }) {
               Release Date: &nbsp;
               {moment(movieDetails.release_date).format("MMMM Do YYYY")}
             </div>
+            <p>{director}</p>
             <div>{movieDetails.overview}</div>
             <div className="thumbs">
               <div className="thumbsUp">
