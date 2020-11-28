@@ -29,57 +29,68 @@ function MovieDetails({ match }) {
             setDirector(entry.name);
           }
         });
-        console.log("Director", director);
       });
   };
 
   const addFav = () => {
-    let newArray = [...favorites];
-    let isNewItem = true;
+    const favObj = {
+      id: movieDetails.id,
+      title: movieDetails.title,
+      thumbsUp: 1,
+      thumbsDown: null,
+    };
+    if (!localStorage.getItem("films")) {
+      localStorage.setItem("films", JSON.stringify([favObj]));
+      setFavorites([favObj]);
+    } else {
+      let newArray = [...favorites];
+      let isNewItem = true;
 
-    favorites.forEach((item, i) => {
-      if (item.id + "" === movieDetails.id + "") {
-        newArray[i].thumbsUp++;
-        isNewItem = false;
+      favorites.forEach((item, i) => {
+        if (item.id + "" === movieDetails.id + "") {
+          newArray[i].thumbsUp++;
+          isNewItem = false;
+        }
+        setFavorites(newArray);
+        return newArray;
+      });
+      if (isNewItem === true) {
+        newArray.push(favObj);
+        return newArray;
       }
       setFavorites(newArray);
-      return newArray;
-    });
-    if (isNewItem === true) {
-      newArray.push({
-        id: movieDetails.id,
-        title: movieDetails.title,
-        thumbsUp: 1,
-        thumbsDown: null,
-      });
-      return newArray;
+      localStorage.setItem("films", JSON.stringify(newArray));
     }
-    setFavorites(newArray);
-    localStorage.setItem("films", JSON.stringify(newArray));
   };
   const addDislike = () => {
-    let newArray = [...favorites];
-    let isNewItem = true;
+    const dislikeObj = {
+      id: movieDetails.id,
+      title: movieDetails.title,
+      thumbsUp: null,
+      thumbsDown: 1,
+    };
+    if (!localStorage.getItem("films")) {
+      localStorage.setItem("films", JSON.stringify([dislikeObj]);
+      setFavorites([dislikeObj]);
+    } else {
+      let newArray = [...favorites];
+      let isNewItem = true;
 
-    favorites.forEach((item, i) => {
-      if (item.id + "" === movieDetails.id + "") {
-        newArray[i].thumbsDown++;
-        isNewItem = false;
+      favorites.forEach((item, i) => {
+        if (item.id + "" === movieDetails.id + "") {
+          newArray[i].thumbsDown++;
+          isNewItem = false;
+        }
+        setFavorites(newArray);
+        return newArray;
+      });
+      if (isNewItem === true) {
+        newArray.push(dislikeObj);
+        return newArray;
       }
       setFavorites(newArray);
-      return newArray;
-    });
-    if (isNewItem === true) {
-      newArray.push({
-        id: movieDetails.id,
-        title: movieDetails.title,
-        thumbsUp: null,
-        thumbsDown: 1,
-      });
-      return newArray;
+      localStorage.setItem("films", JSON.stringify(newArray));
     }
-    setFavorites(newArray);
-    localStorage.setItem("films", JSON.stringify(newArray));
   };
 
   useEffect(() => {
