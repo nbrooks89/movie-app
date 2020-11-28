@@ -7,18 +7,18 @@ import HomePage from "./Pages/HomePage/HomePage";
 import MovieList from "./Pages/MovieList/MovieList";
 import SearchBar from "./Components/SearchBar/SearchBar";
 import MovieDetails from "./Pages/MovieDetails/MovieDetails";
+import Favorites from "./Pages/Favorites/Favorites";
 function App() {
   const [movieList, setMovieList] = useState([]);
-  // const [favorites, setFavorites] = useState([]);
+  const [favorites, setFavorites] = useState([]);
 
   const setMovies = (results) => {
     setMovieList(results);
   };
 
-  // const setFavoriteList = (favorite) => {
-  //   setFavorites(favorite);
-
-  // };
+  const setFavoritesList = (favorite) => {
+    setFavorites(favorite);
+  };
 
   return (
     <div className="App">
@@ -36,7 +36,21 @@ function App() {
       <Route
         path="/Movie/:id"
         render={(routerProps) => (
-          <MovieDetails match={routerProps.match} setMovies={setMovies} />
+          <MovieDetails
+            match={routerProps.match}
+            setMovies={setMovies}
+            setFavoritesList={setFavoritesList}
+            favorites={favorites}
+          />
+        )}
+      />
+      <Route
+        path="/favorites"
+        render={() => (
+          <Favorites
+            setFavoritesList={setFavoritesList}
+            favorites={favorites}
+          />
         )}
       />
     </div>

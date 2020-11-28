@@ -9,17 +9,12 @@
 }
 
 .movieTitle {
-  font-size: 30px;
-
+  font-size: 23px;
+  font-weight: 400;
   margin: 15px;
   color: black;
 }
 
 .cardDetailsContainer a {
   text-decoration: none;
-}
-
-.cast {
-  margin-top: 70px;
-  font-size: 40px;
 }

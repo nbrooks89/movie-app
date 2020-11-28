@@ -1,17 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./MovieCard.css";
+import "./FavoriteCard.css";
 import NoPicture from "../../assets/No_Picture.jpg";
 
-function MovieCard({ title, id, poster, imgUrl }) {
+function FavoriteCard({ title, id, poster, imgUrl, deleteFavorite }) {
   return (
-    <div className="cardDetailsContainer">
+    <div className="favDetailsContainer">
       <Link to={"/Movie/" + id}>
-        <div className="movieTitle">{title}</div>
+        <h1>{title}</h1>
         <img src={poster ? imgUrl + poster : NoPicture} alt={title} key={id} />
       </Link>
+      <button onClick={deleteFavorite} id={id}>
+        Delete
+      </button>
     </div>
   );
 }
 
-export default MovieCard;
+export default FavoriteCard;

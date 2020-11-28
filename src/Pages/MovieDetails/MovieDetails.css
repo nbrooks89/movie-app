@@ -66,6 +66,10 @@
   margin-left: 15px;
   padding-top: 15px;
 }
+.cast {
+  margin-top: 70px;
+  font-size: 40px;
+}
 .movieActorGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));

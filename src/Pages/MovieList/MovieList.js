@@ -3,34 +3,25 @@ import "./MovieList.css";
 import MovieCard from "../../Components/MovieCard/MovieCard";
 function MovieList({ movies }) {
   if (!movies) {
-    return <div>Loading</div>;
+    return <div>No Movies</div>;
   }
-  console.log(movies);
-
-  // const moviesList = movies.results
-  // console.log("helloMovie",moviesList)
-  // console.log( moviesList.map(movie =>movie.title))
 
   return (
-    <>
-      <div className="movieListContainer">
-        <div className="movieListGrid">
-          {movies.map((movie) => {
-            return (
-              <>
-                <MovieCard
-                  poster={movie.poster_path}
-                  imgUrl={"https://image.tmdb.org/t/p/w400"}
-                  title={movie.title}
-                  date={movie.release_date}
-                  id={movie.id}
-                />
-              </>
-            );
-          })}
-        </div>
-      </div>
-    </>
+    <div className="movieListGrid">
+      {movies.map((movie) => {
+        return (
+          <>
+            <MovieCard
+              poster={movie.poster_path}
+              imgUrl={"https://image.tmdb.org/t/p/w400"}
+              title={movie.title}
+              date={movie.release_date}
+              id={movie.id}
+            />
+          </>
+        );
+      })}
+    </div>
   );
 }
 

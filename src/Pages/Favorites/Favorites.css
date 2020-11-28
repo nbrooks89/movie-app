@@ -1,0 +1,17 @@
+.favoritesListGrid {
+  padding-top: 100px;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  align-items: end;
+  margin: 0px 50px;
+  grid-gap: 5rem;
+  padding-top: 50px;
+  margin-bottom: 30px;
+}
+.myFavorites {
+  font-family: "Castoro", serif;
+  margin: 0;
+  padding-top: 90px;
+  font-size: 40px;
+}

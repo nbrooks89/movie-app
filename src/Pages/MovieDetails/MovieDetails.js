@@ -7,10 +7,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsDown } from "@fortawesome/free-solid-svg-icons";
 
-function MovieDetails({ match }) {
+function MovieDetails({ match, setFavoritesList, favorites }) {
   const [movieDetails, setMovieDetails] = useState([]);
   const [cast, setCast] = useState([]);
-  const [favorites, setFavorites] = useState([]);
   const [director, setDirector] = useState("");
 
   const handleGetDetails = () => {
@@ -34,12 +33,13 @@ function MovieDetails({ match }) {
     const favObj = {
       id: movieDetails.id,
       title: movieDetails.title,
+      poster_path: movieDetails.poster_path,
       thumbsUp: 1,
       thumbsDown: null,
     };
     if (!localStorage.getItem("films")) {
       localStorage.setItem("films", JSON.stringify([favObj]));
-      setFavorites([favObj]);
+      setFavoritesList([favObj]);
     } else {
       let newArray = [...favorites];
       let isNewItem = true;
@@ -48,16 +48,16 @@ function MovieDetails({ match }) {
         if (item.id + "" === movieDetails.id + "") {
           newArray[i].thumbsUp++;
           isNewItem = false;
+          setFavoritesList(newArray);
+          return newArray;
         }
-        setFavorites(newArray);
-        return newArray;
       });
       if (isNewItem === true) {
         newArray.push(favObj);
-        return newArray;
+        setFavoritesList(newArray);
       }
-      setFavorites(newArray);
       localStorage.setItem("films", JSON.stringify(newArray));
+      return newArray;
     }
   };
   const addDislike = () => {
@@ -69,7 +69,7 @@ function MovieDetails({ match }) {
     };
     if (!localStorage.getItem("films")) {
       localStorage.setItem("films", JSON.stringify([dislikeObj]));
-      setFavorites([dislikeObj]);
+      setFavoritesList([dislikeObj]);
     } else {
       let newArray = [...favorites];
       let isNewItem = true;
@@ -78,23 +78,23 @@ function MovieDetails({ match }) {
         if (item.id + "" === movieDetails.id + "") {
           newArray[i].thumbsDown++;
           isNewItem = false;
+          setFavoritesList(newArray);
+          return newArray;
         }
-        setFavorites(newArray);
-        return newArray;
       });
       if (isNewItem === true) {
         newArray.push(dislikeObj);
-        return newArray;
+        setFavoritesList(newArray);
       }
-      setFavorites(newArray);
       localStorage.setItem("films", JSON.stringify(newArray));
+      return newArray;
     }
   };
 
   useEffect(() => {
     const favoritesList = JSON.parse(localStorage.getItem("films"));
     if (favoritesList) {
-      setFavorites(favoritesList);
+      setFavoritesList(favoritesList);
       console.log(favoritesList);
       console.log(favorites);
     }

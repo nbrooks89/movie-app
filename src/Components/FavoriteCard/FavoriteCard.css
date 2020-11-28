@@ -1,0 +1,19 @@
+.favDetailsContainer {
+  border: 1px solid black;
+}
+.favDetailsContainer h1 {
+  font-size: 23px;
+  font-weight: 400;
+  margin: 15px;
+  color: black;
+}
+
+.favDetailsContainer img {
+  width: 100%;
+  justify-self: center;
+  align-self: center;
+}
+
+.favDetailsContainer a {
+  text-decoration: none;
+}

@@ -11,15 +11,15 @@
 .icon {
   margin-left: 10px;
 }
-.search {
-  margin-right: 10px;
-}
-/* ul {
+.favSearch {
   display: flex;
-  margin-block-start: 0;
-  margin-block-end: 0;
-  padding-inline-start: 0;
-  height: 100%;
+  align-items: center;
+}
 
-  justify-content: flex-end;
-} */
+.favSearch a {
+  text-decoration: none;
+  color: white;
+  margin-right: 10px;
+  font-size: 27px;
+  font-weight: 500;
+}
