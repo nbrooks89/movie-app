@@ -16,10 +16,24 @@
   align-items: center;
 }
 
-.favSearch a {
+.favoriteIcon {
+  visibility: hidden;
+  font-size: 1px;
+  margin-right: 10px;
+}
+.favorite {
   text-decoration: none;
   color: white;
-  margin-right: 10px;
+
   font-size: 27px;
   font-weight: 500;
+}
+@media screen and (max-width: 750px) {
+  .favoriteIcon {
+    visibility: Visible;
+    font-size: 17px;
+  }
+  .favorite {
+    display: none;
+  }
 }

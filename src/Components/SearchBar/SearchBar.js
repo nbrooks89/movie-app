@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Redirect, withRouter } from "react-router-dom";
 import "./SearchBar.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 function SearchBar({ setMovies, history }) {
   const [userInput, setUserInput] = useState("");
@@ -55,7 +57,9 @@ function SearchBar({ setMovies, history }) {
             required
           />
           <button className="searchButton" type="submit">
-            <div>SEARCH</div>
+            <div className="searchIcon">
+              <FontAwesomeIcon icon={faSearch} color="rgb(29, 122, 165)" />
+            </div>
           </button>
         </form>
       </div>
@@ -71,7 +75,9 @@ function SearchBar({ setMovies, history }) {
           required
         />
         <button className="searchButton" type="submit">
-          <div>SEARCH</div>
+          <div className="searchIcon">
+            <FontAwesomeIcon icon={faSearch} color="rgb(29, 122, 165)" />
+          </div>
         </button>
       </form>
     </div>

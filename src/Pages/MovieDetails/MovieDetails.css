@@ -9,8 +9,14 @@
 }
 .movieDetailsContainer h1 {
   padding-top: 80px;
-  margin-bottom: 60px;
-  font-size: 45px;
+  margin-bottom: 40px;
+  font-size: 40px;
+  font-family: "Castoro", serif;
+  font-weight: 300;
+}
+.cast {
+  margin-top: 70px;
+  font-size: 40px;
   font-family: "Castoro", serif;
 }
 .detailsInnerContainer {
@@ -65,10 +71,6 @@
   font-size: 20px;
   margin-left: 15px;
   padding-top: 15px;
-}
-.cast {
-  margin-top: 70px;
-  font-size: 40px;
 }
 .movieActorGrid {
   display: grid;

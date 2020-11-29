@@ -8,10 +8,24 @@
 }
 
 .searchButton {
-  height: 43px;
-  width: 100px;
+  height: 44px;
+  width: 60px;
   border-radius: 0px;
   font-size: 19px;
   margin-right: 5px;
   border: 2px solid rgb(29, 122, 165);
+}
+
+.searchIcon {
+  font-size: 25px;
+}
+form {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media screen and (max-width: 750px) {
+  .searchContainer {
+    width: 150px;
+  }
 }
