@@ -4,9 +4,8 @@ import "./SearchBar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
-function SearchBar({ setMovies, history }) {
+function SearchBar({ setMovieList, history }) {
   const [userInput, setUserInput] = useState("");
-  const [clickSubmit, setClickSubmit] = useState(false);
 
   const handleChange = (event) => {
     setUserInput(event.target.value);
@@ -14,7 +13,6 @@ function SearchBar({ setMovies, history }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setClickSubmit(true);
     handleGetRequest(userInput);
     setUserInput("");
     history.push("/MovieList");
@@ -39,32 +37,10 @@ function SearchBar({ setMovies, history }) {
     return Promise.all([page1, page2, page3]).then(([page1, page2, page3]) => {
       let results = page1.results.concat(page2.results);
       results = results.concat(page3.results);
-      setMovies(results);
+      setMovieList(results);
     });
   };
 
-  //   useEffect(() => {});
-  if (clickSubmit === true) {
-    console.log(clickSubmit);
-    <Redirect to="/MovieList" />;
-    return (
-      <div className="formContainer">
-        <form onSubmit={handleSubmit}>
-          <input
-            className="searchContainer"
-            value={userInput}
-            onChange={handleChange}
-            required
-          />
-          <button className="searchButton" type="submit">
-            <div className="searchIcon">
-              <FontAwesomeIcon icon={faSearch} color="rgb(29, 122, 165)" />
-            </div>
-          </button>
-        </form>
-      </div>
-    );
-  }
   return (
     <div>
       <form onSubmit={handleSubmit}>

@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsDown } from "@fortawesome/free-solid-svg-icons";
 
-function MovieDetails({ match, setFavoritesList, favorites }) {
+function MovieDetails({ match, setFavorites, favorites }) {
   const [movieDetails, setMovieDetails] = useState([]);
   const [cast, setCast] = useState([]);
   const [director, setDirector] = useState("");
@@ -24,7 +24,6 @@ function MovieDetails({ match, setFavoritesList, favorites }) {
           if (entry.job === "Director") {
             setDirector(entry.name);
           }
-          console.log("director", director);
         });
       });
   };
@@ -39,7 +38,7 @@ function MovieDetails({ match, setFavoritesList, favorites }) {
     };
     if (!localStorage.getItem("films")) {
       localStorage.setItem("films", JSON.stringify([favObj]));
-      setFavoritesList([favObj]);
+      setFavorites([favObj]);
     } else {
       let newArray = [...favorites];
       let isNewItem = true;
@@ -48,13 +47,13 @@ function MovieDetails({ match, setFavoritesList, favorites }) {
         if (item.id + "" === movieDetails.id + "") {
           newArray[i].thumbsUp++;
           isNewItem = false;
-          setFavoritesList(newArray);
+          setFavorites(newArray);
           return newArray;
         }
       });
       if (isNewItem === true) {
         newArray.push(favObj);
-        setFavoritesList(newArray);
+        setFavorites(newArray);
       }
       localStorage.setItem("films", JSON.stringify(newArray));
       return newArray;
@@ -69,7 +68,7 @@ function MovieDetails({ match, setFavoritesList, favorites }) {
     };
     if (!localStorage.getItem("films")) {
       localStorage.setItem("films", JSON.stringify([dislikeObj]));
-      setFavoritesList([dislikeObj]);
+      setFavorites([dislikeObj]);
     } else {
       let newArray = [...favorites];
       let isNewItem = true;
@@ -78,13 +77,13 @@ function MovieDetails({ match, setFavoritesList, favorites }) {
         if (item.id + "" === movieDetails.id + "") {
           newArray[i].thumbsDown++;
           isNewItem = false;
-          setFavoritesList(newArray);
+          setFavorites(newArray);
           return newArray;
         }
       });
       if (isNewItem === true) {
         newArray.push(dislikeObj);
-        setFavoritesList(newArray);
+        setFavorites(newArray);
       }
       localStorage.setItem("films", JSON.stringify(newArray));
       return newArray;
@@ -94,9 +93,7 @@ function MovieDetails({ match, setFavoritesList, favorites }) {
   useEffect(() => {
     const favoritesList = JSON.parse(localStorage.getItem("films"));
     if (favoritesList) {
-      setFavoritesList(favoritesList);
-      console.log(favoritesList);
-      console.log(favorites);
+      setFavorites(favoritesList);
     }
     handleGetDetails();
     window.scrollTo(0, 0);

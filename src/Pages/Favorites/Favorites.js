@@ -2,18 +2,18 @@ import React, { useEffect } from "react";
 import "./Favorites.css";
 import FavoriteCard from "../../Components/FavoriteCard/FavoriteCard";
 
-function Favorites({ favorites, setFavoritesList }) {
+function Favorites({ favorites, setFavorites }) {
   const deleteFavorite = (event) => {
     let newArray = [...favorites];
     favorites.forEach((item, i) => {
       if (event.target.id + "" === item.id + "") {
         if (item.thumbsDown !== null) {
           newArray[i].thumbsUp = null;
-          setFavoritesList(newArray);
+          setFavorites(newArray);
           localStorage.setItem("films", JSON.stringify(newArray));
         } else {
           newArray[i].thumbsUp = null;
-          setFavoritesList(newArray);
+          setFavorites(newArray);
           localStorage.setItem("films", JSON.stringify(newArray));
           return newArray;
         }
@@ -24,7 +24,7 @@ function Favorites({ favorites, setFavoritesList }) {
   useEffect(() => {
     if (localStorage.getItem("films")) {
       const films = JSON.parse(localStorage.getItem("films"));
-      setFavoritesList(films);
+      setFavorites(films);
     }
     window.scrollTo(0, 0);
   }, []);

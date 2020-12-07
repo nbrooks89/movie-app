@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Route } from "react-router-dom";
 import "./App.css";
 import NavBar from "./Components/NavBar/NavBar";
-
 import HomePage from "./Pages/HomePage/HomePage";
 import MovieList from "./Pages/MovieList/MovieList";
 import SearchBar from "./Components/SearchBar/SearchBar";
@@ -12,34 +11,32 @@ function App() {
   const [movieList, setMovieList] = useState([]);
   const [favorites, setFavorites] = useState([]);
 
-  const setMovies = (results) => {
-    setMovieList(results);
-  };
-
-  const setFavoritesList = (favorite) => {
-    setFavorites(favorite);
-  };
-
   return (
     <div className="App">
-      <NavBar setMovies={setMovies}>
+      <NavBar setMovieList={setMovieList}>
         {window.location.pathname !== "/" && (
-          <SearchBar setMovies={setMovies} />
+          <SearchBar setMovieList={setMovieList} />
         )}
       </NavBar>
-      <Route exact path="/" render={() => <HomePage setMovies={setMovies} />} />
+      <Route
+        exact
+        path="/"
+        render={() => <HomePage setMovieList={setMovieList} />}
+      />
 
       <Route
         path="/MovieList"
-        render={() => <MovieList movies={movieList} setMovies={setMovies} />}
+        render={() => (
+          <MovieList movies={movieList} setMovieList={setMovieList} />
+        )}
       />
       <Route
         path="/Movie/:id"
         render={(routerProps) => (
           <MovieDetails
             match={routerProps.match}
-            setMovies={setMovies}
-            setFavoritesList={setFavoritesList}
+            setMovies={setMovieList}
+            setFavorites={setFavorites}
             favorites={favorites}
           />
         )}
@@ -47,10 +44,7 @@ function App() {
       <Route
         path="/favorites"
         render={() => (
-          <Favorites
-            setFavoritesList={setFavoritesList}
-            favorites={favorites}
-          />
+          <Favorites setFavorites={setFavorites} favorites={favorites} />
         )}
       />
     </div>

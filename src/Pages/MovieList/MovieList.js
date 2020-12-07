@@ -2,7 +2,6 @@ import React from "react";
 import "./MovieList.css";
 import MovieCard from "../../Components/MovieCard/MovieCard";
 function MovieList({ movies }) {
-  console.log(movies);
   return (
     <>
       {movies.length < 1 ? (
